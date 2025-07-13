@@ -8,10 +8,9 @@
   <groupId>com.mycompany.app</groupId>
   <artifactId>my-app</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>war</packaging> <!-- Use war packaging for servlet apps -->
 
-  <name>My App</name>
-  <url>http://www.example.com</url>
+  <name>My Web App</name>
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
@@ -19,12 +18,18 @@
   </properties>
 
   <dependencies>
-    <!-- Add your dependencies here if needed -->
+    <!-- Servlet API Dependency -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
-      <!-- Maven Compiler Plugin -->
+      <!-- Compiler Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -35,7 +40,17 @@
         </configuration>
       </plugin>
 
-      <!-- Maven Enforcer Plugin with correct version -->
+      <!-- Maven WAR Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.4.0</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+
+      <!-- Enforcer Plugin (Optional) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
@@ -52,7 +67,6 @@
                   <version>[17,)</version>
                 </requireJavaVersion>
               </rules>
-              <fail>true</fail>
             </configuration>
           </execution>
         </executions>
@@ -61,4 +75,3 @@
   </build>
 
 </project>
-
